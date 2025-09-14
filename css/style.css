@@ -1,0 +1,275 @@
+/* --- 字体定义 --- */
+@font-face {
+  font-family: 'CustomFont'; /* 简体中文/默认字体 */
+  src: url('https://fonts.yani.qzz.io/fonts/ZCOOLXiaoWei-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JapaneseFont'; /* 日语字体 */
+  src: url('https://fonts.yani.qzz.io//fonts/NotoSerifJP-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RussianFont'; /* 俄语字体 */
+  src: url('https://fonts.yani.qzz.io//fonts/PlayfairDisplay-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TraditionalChineseFont'; /* 繁體中文字体 */
+  src: url('https://fonts.yani.qzz.io//fonts/NotoSerifHK-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* --- 变量定义 --- */
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --card-bg-color: #fff;
+    --header-bg-color: #333;
+    --header-text-color: #fff;
+    --link-color: #337ab7;
+    --footer-text-color: #888;
+    --shadow-color: rgba(0,0,0,0.1);
+    --btn-bg-color: #e0e0e0;
+    --btn-text-color: #333;
+    --btn-border-color: #ccc;
+}
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg-color: #1e1e1e;
+    --header-bg-color: #1e1e1e;
+    --header-text-color: #e0e0e0;
+    --link-color: #58a6ff;
+    --footer-text-color: #aaa;
+    --shadow-color: rgba(255,255,255,0.1);
+    --btn-bg-color: #333;
+    --btn-text-color: #e0e0e0;
+    --btn-border-color: #555;
+}
+
+/* --- 通用样式 --- */
+body {
+    font-family: 'CustomFont', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --- 特定语言字体应用 --- */
+html[lang="ja"] body {
+    font-family: 'JapaneseFont', 'CustomFont', sans-serif;
+}
+html[lang="ru"] body {
+    font-family: 'RussianFont', 'CustomFont', serif;
+}
+html[lang="zh-TW"] body {
+    font-family: 'TraditionalChineseFont', 'CustomFont', serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: auto;
+    padding: 20px 0;
+}
+.main-content.container {
+    padding-top: 40px;
+}
+
+/* --- Header --- */
+header {
+    background: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: 1rem 0;
+    transition: background 0.3s;
+}
+header .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    box-sizing: border-box;
+}
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'JapaneseFont', sans-serif;
+}
+
+/* --- 主要内容区域 --- */
+.main { padding: 20px; background: var(--card-bg-color); border-radius: 8px; box-shadow: 0 0 10px var(--shadow-color); transition: background 0.3s; }
+.profile-image { display: block; margin: 20px auto; max-width: 100%; width: 250px; height: auto; border-radius: 15px; }
+.about, .social-media { margin-bottom: 20px; }
+.about h2, .social-media h2 { color: var(--text-color); text-align: center; }
+.about p { text-align: center; }
+.social-media ul { list-style: none; padding: 0; text-align: center; }
+.social-media li { display: inline-block; margin: 0 15px; }
+.social-media a { text-decoration: none; color: var(--link-color); font-size: 1.1em; transition: color 0.3s; }
+.social-media a:hover { text-decoration: underline; }
+
+/* ★★★ 修改：为页脚指定字体 ★★★ */
+footer {
+    font-family: 'JapaneseFont', sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: var(--footer-text-color);
+    transition: color 0.3s;
+}
+
+/*
+================================
+移动端: 导航栏和侧边栏样式
+================================
+*/
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+}
+.menu-toggle svg { stroke: var(--header-text-color); }
+#main-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100dvh;
+    background: var(--card-bg-color);
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 60px 20px 20px 20px;
+    box-sizing: border-box; 
+    overflow-y: auto;
+}
+#main-nav.open { transform: translateX(0); }
+.close-menu {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+.nav-links { list-style: none; padding: 0; margin: 0; }
+.nav-links a { text-decoration: none; color: var(--text-color); font-size: 1.2em; padding: 10px 0; display: block; }
+.nav-links a:hover { color: var(--link-color); }
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid var(--btn-border-color);
+}
+.control-btn {
+    padding: 8px 12px;
+    border: 1px solid var(--btn-border-color);
+    background-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    z-index: 1000;
+}
+.overlay.active { display: block; }
+
+/*
+================================
+桌面端样式 (屏幕宽度 > 768px)
+================================
+*/
+@media (min-width: 768px) {
+    header .container {
+        justify-content: space-between;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    header h1 {
+        white-space: normal;
+        overflow: visible;
+    }
+    .menu-toggle, .close-menu {
+        display: none;
+    }
+    #main-nav {
+        display: flex;
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        transform: none;
+        padding: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: 25px;
+        z-index: auto;
+        overflow-y: visible;
+    }
+    .nav-links a {
+        padding: 0;
+        color: var(--header-text-color);
+        font-size: 1em;
+    }
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+    .controls {
+        flex-direction: row;
+        gap: 10px;
+        padding-top: 0;
+        border-top: none;
+        width: auto;
+    }
+    .control-btn {
+        background-color: transparent;
+        border-color: var(--header-text-color);
+        color: var(--header-text-color);
+        width: auto;
+    }
+}
